@@ -2,11 +2,11 @@ import { Document, Schema, model } from 'mongoose';
 
 export interface User {
     snowflake: string;
-    admin: boolean;
+    admin?: boolean;
 }
 
 const UserSchema = new Schema({
-    id: String,
+    snowflake: String,
     admin: {
         type: Boolean,
         required: false,

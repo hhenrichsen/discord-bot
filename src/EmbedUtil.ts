@@ -1,9 +1,9 @@
-import { TextChannel, MessageEmbed } from "discord.js";
+import { TextChannel, DMChannel, NewsChannel, MessageEmbed } from "discord.js";
 import Command from "./commands/Command";
 
-export function showErrorEmbed(channel: TextChannel, command: Command, error: string) {
+export function showErrorEmbed(channel: TextChannel | DMChannel | NewsChannel, command: Command | string, error: string) {
     const embed = new MessageEmbed();
-    if(command.name !== undefined) {
+    if(typeof command !== "string" && command.name !== undefined) {
         embed.setTitle(`${process.env.BOT_NAME} | ${command.name} | Error`);
     }
     else {

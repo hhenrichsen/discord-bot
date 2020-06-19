@@ -58,7 +58,7 @@ export default class MessageHandler {
         else {
             guildSettings = await GuildModel.findOne({ id: msg.guild.id });
             if(guildSettings === undefined || guildSettings === null) {
-                guildSettings = await GuildModel.create({ id: msg.guild.id });
+                guildSettings = await GuildModel.create({ snowflake: msg.guild.id });
                 logger.warn(`Found message in unknown guild ${msg.guild.name} (${msg.guild.id}). Creating guild data.`);
             }
             GuildManager.guilds.set(msg.guild.id, guildSettings);
@@ -81,9 +81,6 @@ export default class MessageHandler {
     async handleCommand(msg : Message, messageData? : MessageData) {
         const { cmd, args, guildSettings } = messageData;
         if(!this.commands.has(cmd)) {
-            if(guildSettings && !guildSettings.config.showInvalidCommand) {
-                return;
-            }
             logger.silly(`Invalid command ${cmd}.`);
             showErrorEmbed(msg.channel, cmd, `Invalid command \`${cmd}\`.`);
             return;
@@ -91,24 +88,18 @@ export default class MessageHandler {
         const command = this.commands.get(cmd.toLowerCase());
         if(!command.contexts.has(msg.channel.type)) {
             logger.silly(`Invalid context for command ${cmd} for ${msg.author.id}`);
-            if(guildSettings && !guildSettings.config.showInvalidCommand) {
-                return;
-            }
             showErrorEmbed(msg.channel, command, 'You can\'t use that here.');
             return;
         }
         // @ts-ignore
         if(command.requiredPermissions && !msg.member.hasPermission(command.requiredPermissions)) {
             logger.silly(`No permissions to use command ${cmd} for ${msg.author.id}`);
-            if(guildSettings && !guildSettings.config.showInvalidCommand) {
-                return;
-            }
             showErrorEmbed(msg.channel, command, 'You don\'t have permission to use that here.');
             return;
         }
-        let user = await UserModel.findOne({ id: msg.author.id });
+        let user = await UserModel.findOne({ snowflake: msg.author.id });
         if(!user) {
-            user = await UserModel.create({ id: msg.author.id });
+            user = await UserModel.create({ snowflake: msg.author.id });
         }
         try {
             await command.execute(msg, args, guildSettings, user);

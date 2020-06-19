@@ -11,7 +11,7 @@
     "start:watch": "nodemon --watch 'src/**/*' --ignore 'src/**/*.spec.ts' --exec ts-node src/index.ts",
     "start": "node dist/index.js",
     "lint": "eslint . --ext .ts",
-    "build": "tsc"
+    "build": "npm run lint && tsc"
   },
   "dependencies": {
     "bufferutil": "^4.0.1",
@@ -31,8 +31,8 @@
   "devDependencies": {
     "@types/mongoose": "^5.7.16",
     "@types/node": "^13.13.5",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "nodemon": "^2.0.3",
     "typescript": "^3.8.3"
   }

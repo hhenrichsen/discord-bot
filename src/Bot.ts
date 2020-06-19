@@ -6,7 +6,6 @@ import { connect } from 'mongoose';
 // Logging
 import logger from './services/logger';
 import { GuildModel } from './models/Guild';
-import TownModel from './models/Town'
 import GuildManager from './GuildManager';
 import MessageHandler from './MessageHandler';
 
@@ -20,14 +19,13 @@ const client = new Client();
 const messageHandler = new MessageHandler();
 
 client.on('guildCreate', async (guild) => {
-    const guildSettings = await GuildModel.create({ id: guild.id });
+    const guildSettings = await GuildModel.create({ snowflake: guild.id });
     GuildManager.guilds.set(guild.id, guildSettings);
 });
 
 client.on('guildDelete', async (guild) => {
     GuildModel.deleteOne({ id: guild.id });
     GuildManager.guilds.delete(guild.id);
-    TownModel.updateMany({ server: guild.id }, { active: false });
 });
 
 client.on('message', async (msg) => {
