@@ -2,7 +2,7 @@
 import dotenv from 'dotenv';
 // Load connection information.
 import { Client } from 'discord.js';
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
 // Logging
 import logger from './services/logger';
 import { GuildModel } from './models/Guild';
@@ -40,8 +40,12 @@ client.on('message', async (msg) => {
         });
     }
 });
-(async () => {
-    await connect(`mongodb://${process.env.DB_USER}:${encodeURI(process.env.DB_PASS)}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`);
+(async () => {    
+    mongoose.set('useNewUrlParser', true);
+    mongoose.set('useFindAndModify', false);
+    mongoose.set('useCreateIndex', true);
+    mongoose.set('useUnifiedTopology', true);
+    await mongoose.connect(`mongodb://${process.env.DB_USER}:${encodeURI(process.env.DB_PASS)}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`);
     return client.login(TOKEN);
 })().catch(err => {
     logger.error(err);
