@@ -19,21 +19,21 @@
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "erlpack": "^0.1.3",
-    "eslint": "^7.0.0",
-    "mongodb": "^3.5.7",
-    "mongoose": "^5.9.13",
+    "eslint": "^7.6.0",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.9.27",
     "ts-node": "^8.10.1",
     "utf-8-validate": "^5.0.2",
-    "winston": "^3.2.1",
+    "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.4.2",
     "zlib-sync": "^0.1.6"
   },
   "devDependencies": {
-    "@types/mongoose": "^5.7.16",
-    "@types/node": "^13.13.5",
+    "@types/mongoose": "^5.7.34",
+    "@types/node": "^13.13.15",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "nodemon": "^2.0.3",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.7"
   }
 }
