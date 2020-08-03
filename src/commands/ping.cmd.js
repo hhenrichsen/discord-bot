@@ -6,7 +6,7 @@ module.exports = {
         text: true,
         dm: true,
     },
-    async execute(msg) {
+    async execute(msg, args, guildSettings, user) {
         const embed = new MessageEmbed();
         embed.setTitle(`${process.env.BOT_NAME} | Ping`);
         embed.setColor('#00ffaa');

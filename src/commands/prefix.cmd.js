@@ -7,7 +7,7 @@ module.exports = {
         text: true,
     },
     requiredPermissions: ['MANAGE_GUILD'],
-    async execute(msg, args, client, guildSettings) {
+    async execute(msg, args, guildSettings, user) {
         if(args.length < 1) {
             const embed = new MessageEmbed();
             embed.setTitle(`${process.env.BOT_NAME} | Prefix`);
