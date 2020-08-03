@@ -59,7 +59,7 @@ export default class MessageHandler {
             guildSettings = await GuildModel.findOne({ snowflake: msg.guild.id });
             if(guildSettings === undefined || guildSettings === null) {
                 guildSettings = await GuildModel.create({ snowflake: msg.guild.id });
-                logger.warn(`Found message in unknown guild ${msg.guild.name} (${msg.guild.id}). Creating guild data.`);
+                logger.info(`Found message in unknown guild ${msg.guild.name} (${msg.guild.id}). Creating guild data.`);
             }
             GuildManager.guilds.set(msg.guild.id, guildSettings);
         }
